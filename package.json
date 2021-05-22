@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Carlos Henrique Kruger",
@@ -14,7 +15,11 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
     "prettier": "^2.3.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }
