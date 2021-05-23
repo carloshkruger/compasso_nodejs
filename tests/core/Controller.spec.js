@@ -93,6 +93,22 @@ describe('Controller', () => {
     expect(response.data).toBeFalsy()
   })
 
+  test('should return statusCode 200 when "ok" method is called', async () => {
+    jest
+      .spyOn(testController, 'handle')
+      .mockImplementation(async () => testController.ok())
+
+    const params = {
+      data: {
+        name: 'test name',
+      },
+    }
+
+    const response = await testController.execute(params)
+
+    expect(response.statusCode).toBe(200)
+  })
+
   test('should throw an error if handle method is called in a Controller base instance', async () => {
     const controller = new Controller()
 

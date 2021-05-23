@@ -15,6 +15,13 @@ class Controller {
     throw new Error('Method not implemented.')
   }
 
+  ok(data) {
+    return {
+      statusCode: 200,
+      data,
+    }
+  }
+
   created(data) {
     return {
       statusCode: 201,
