@@ -12,9 +12,9 @@ class CreateCityUseCase {
       state,
     })
 
-    const cityFromRepository = await this.citiesRepository.findByName(name)
+    const citiesFromRepository = await this.citiesRepository.findByName(name)
 
-    if (cityFromRepository) {
+    if (citiesFromRepository.length > 0) {
       throw new AppError(`The name "${name}" is already registered.`)
     }
 

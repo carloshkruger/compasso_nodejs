@@ -27,7 +27,7 @@ describe('CreateCityUseCase', () => {
 
     jest
       .spyOn(fakeCitiesRepository, 'findByName')
-      .mockImplementationOnce(async () => city)
+      .mockImplementationOnce(async () => [city])
 
     await expect(createCityUseCase.execute(cityDTO)).rejects.toThrow(AppError)
     expect(saveSpy).not.toHaveBeenCalled()
