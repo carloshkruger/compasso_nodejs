@@ -1,6 +1,5 @@
-const AppError = require("../core/AppError")
-const User = require("../domain/User")
-
+const AppError = require('../core/AppError')
+const User = require('../domain/User')
 
 class CreateUserUseCase {
   constructor({ usersRepository, citiesRepository }) {

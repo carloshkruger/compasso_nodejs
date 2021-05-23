@@ -1,7 +1,7 @@
-const AppError = require("../../src/core/AppError")
-const UniqueId = require("../../src/core/UniqueId")
+const AppError = require('../../src/core/AppError')
+const UniqueId = require('../../src/core/UniqueId')
 const User = require('../../src/domain/User')
-const CreateUserUseCase = require("../../src/useCases/CreateUserUseCase")
+const CreateUserUseCase = require('../../src/useCases/CreateUserUseCase')
 const FakeCitiesRepository = require('../../src/infra/repositories/inMemory/FakeCitiesRepository')
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
 
@@ -30,7 +30,9 @@ describe('CreateUserUseCase', () => {
   })
 
   test('should throw if the city provided does not exists', async () => {
-    jest.spyOn(fakeCitiesRepository, 'findById').mockImplementationOnce(async () => undefined)
+    jest
+      .spyOn(fakeCitiesRepository, 'findById')
+      .mockImplementationOnce(async () => undefined)
 
     await expect(createUserUseCase.execute(userDTO)).rejects.toThrow(AppError)
     expect(saveUserSpy).not.toHaveBeenCalled()
@@ -39,10 +41,12 @@ describe('CreateUserUseCase', () => {
   test('should create an user if the values are correct', async () => {
     const city = {
       name: 'Aurora',
-      state: 'SC'
+      state: 'SC',
     }
 
-    jest.spyOn(fakeCitiesRepository, 'findById').mockImplementationOnce(async () => city)
+    jest
+      .spyOn(fakeCitiesRepository, 'findById')
+      .mockImplementationOnce(async () => city)
 
     const useCaseResponse = await createUserUseCase.execute(userDTO)
 

@@ -1,5 +1,5 @@
-const AppError = require("../core/AppError")
-const FieldRequiredError = require("../core/FieldRequiredError")
+const AppError = require('../core/AppError')
+const FieldRequiredError = require('../core/FieldRequiredError')
 
 class DeleteUserByIdUseCase {
   constructor({ usersRepository }) {
@@ -10,7 +10,7 @@ class DeleteUserByIdUseCase {
     if (!userId) {
       throw new FieldRequiredError('User id')
     }
-    
+
     const user = await this.usersRepository.findById(userId)
 
     if (!user) {

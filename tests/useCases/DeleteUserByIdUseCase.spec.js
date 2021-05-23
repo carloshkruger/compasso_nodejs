@@ -12,20 +12,26 @@ describe('DeleteUserByIdUseCase', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
     deleteUserByIdUseCase = new DeleteUserByIdUseCase({
-      usersRepository: fakeUsersRepository
+      usersRepository: fakeUsersRepository,
     })
   })
 
   test('should throw if the user id is not provided', async () => {
-    await expect(deleteUserByIdUseCase.execute({ userId: '' })).rejects.toThrow(FieldRequiredError)
+    await expect(deleteUserByIdUseCase.execute({ userId: '' })).rejects.toThrow(
+      FieldRequiredError,
+    )
   })
 
   test('should throw if the user does not exists', async () => {
-    jest.spyOn(fakeUsersRepository, 'findById').mockImplementationOnce(async () => undefined)
+    jest
+      .spyOn(fakeUsersRepository, 'findById')
+      .mockImplementationOnce(async () => undefined)
 
     const userId = new UniqueId().value
 
-    await expect(deleteUserByIdUseCase.execute({ userId })).rejects.toThrow(AppError)
+    await expect(deleteUserByIdUseCase.execute({ userId })).rejects.toThrow(
+      AppError,
+    )
   })
 
   test('should delete an user', async () => {
@@ -36,7 +42,9 @@ describe('DeleteUserByIdUseCase', () => {
       cityId: new UniqueId().value,
     })
 
-    jest.spyOn(fakeUsersRepository, 'findById').mockImplementationOnce(async () => user)
+    jest
+      .spyOn(fakeUsersRepository, 'findById')
+      .mockImplementationOnce(async () => user)
 
     const deleteUserSpy = jest.spyOn(fakeUsersRepository, 'deleteById')
     const userId = user.id

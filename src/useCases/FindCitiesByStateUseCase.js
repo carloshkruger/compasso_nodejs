@@ -1,5 +1,5 @@
-const AppError = require("../core/AppError")
-const FieldRequiredError = require("../core/FieldRequiredError")
+const AppError = require('../core/AppError')
+const FieldRequiredError = require('../core/FieldRequiredError')
 
 class FindCitiesByStateUseCase {
   constructor({ citiesRepository }) {
