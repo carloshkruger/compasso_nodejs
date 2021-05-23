@@ -22,6 +22,12 @@ class Controller {
     }
   }
 
+  noContent() {
+    return {
+      statusCode: 204,
+    }
+  }
+
   handleExecutionError(error) {
     if (error instanceof AppError) {
       return {

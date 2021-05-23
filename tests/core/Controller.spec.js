@@ -61,9 +61,9 @@ describe('Controller', () => {
   })
 
   test('should return statusCode 200 when "created" method is called', async () => {
-    jest.spyOn(testController, 'handle').mockImplementation(async () => {
-      return testController.created()
-    })
+    jest
+      .spyOn(testController, 'handle')
+      .mockImplementation(async () => testController.created())
 
     const params = {
       data: {
@@ -74,6 +74,23 @@ describe('Controller', () => {
     const response = await testController.execute(params)
 
     expect(response.statusCode).toBe(201)
+  })
+
+  test('should return statusCode 204 when "noContent" method is called', async () => {
+    jest
+      .spyOn(testController, 'handle')
+      .mockImplementation(async () => testController.noContent())
+
+    const params = {
+      data: {
+        name: 'test name',
+      },
+    }
+
+    const response = await testController.execute(params)
+
+    expect(response.statusCode).toBe(204)
+    expect(response.data).toBeFalsy()
   })
 
   test('should throw an error if handle method is called in a Controller base instance', async () => {
