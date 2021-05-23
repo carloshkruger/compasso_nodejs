@@ -4,7 +4,7 @@ const { connect } = require('../sequelize/helper')
 const run = async () => {
   await connect()
 
-  app.listen(3333)
+  app.listen(process.env.PORT || 3333)
 }
 
 run()
