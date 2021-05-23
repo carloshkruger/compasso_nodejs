@@ -18,5 +18,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'object-curly-newline': 'off',
     'no-empty-function': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'arrow-body-style': 'off',
   },
 }
