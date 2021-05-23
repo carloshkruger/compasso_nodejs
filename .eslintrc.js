@@ -12,6 +12,11 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    'class-methods-use-this': 'off',
+    'no-unused-vars': 'off',
     semi: 'off',
+    'import/prefer-default-export': 'off',
+    'object-curly-newline': 'off',
+    'no-empty-function': 'off',
   },
 }
