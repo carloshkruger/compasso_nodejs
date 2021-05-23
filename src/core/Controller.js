@@ -39,13 +39,17 @@ class Controller {
     if (error instanceof AppError) {
       return {
         statusCode: 400,
-        message: error.message,
+        data: {
+          error: error.message,
+        },
       }
     }
 
     return {
       statusCode: 500,
-      message: 'Internal server error',
+      data: {
+        error: 'Internal server error',
+      },
     }
   }
 }
