@@ -57,4 +57,30 @@ describe('User', () => {
 
     expect(() => new User(userDTO)).toThrow(AppError)
   })
+
+  test('should create an user', () => {
+    const user = new User(userDTO)
+
+    expect(user).toBeInstanceOf(User)
+    expect(user.name).toBe(userDTO.name)
+    expect(user.gender).toBe(userDTO.gender)
+    expect(user.birthdate).toBe(userDTO.birthdate)
+    expect(user.cityId).toBe(userDTO.cityId)
+  })
+
+  test('should update the user name', () => {
+    const user = new User(userDTO)
+    const newUserName = 'new user name'
+
+    user.updateName(newUserName)
+
+    expect(user.name).toBe(newUserName)
+  })
+
+  test('should throw if try to update the user name with an invalid value', () => {
+    const user = new User(userDTO)
+    const newUserName = ''
+
+    expect(() => user.updateName(newUserName)).toThrow(FieldRequiredError)
+  })
 })

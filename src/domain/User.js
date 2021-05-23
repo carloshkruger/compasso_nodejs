@@ -11,9 +11,7 @@ class User extends Entity {
   }
 
   static validate(props) {
-    if (!props.name) {
-      throw new FieldRequiredError('Name')
-    }
+    User.validateName(props.name)
 
     if (!props.gender) {
       throw new FieldRequiredError('Gender')
@@ -36,6 +34,12 @@ class User extends Entity {
     }
   }
 
+  static validateName(name) {
+    if (!name) {
+      throw new FieldRequiredError('Name')
+    }
+  }
+
   get name() {
     return this.props.name
   }
@@ -50,6 +54,12 @@ class User extends Entity {
 
   get cityId() {
     return this.props.cityId
+  }
+
+  updateName(name) {
+    User.validateName(name)
+
+    this.props.name = name
   }
 }
 
