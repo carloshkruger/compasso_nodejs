@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "npx jest --runInBand",
+    "test:cov": "npx jest --clearCache && npm run test -- --coverage",
     "prepare": "husky install"
   },
   "keywords": [],
