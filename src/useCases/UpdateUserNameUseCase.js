@@ -1,5 +1,5 @@
-const AppError = require("../core/AppError")
-const FieldRequiredError = require("../core/FieldRequiredError")
+const AppError = require('../core/AppError')
+const FieldRequiredError = require('../core/FieldRequiredError')
 
 class UpdateUserNameUseCase {
   constructor({ usersRepository }) {
@@ -14,7 +14,7 @@ class UpdateUserNameUseCase {
     if (!name) {
       throw new FieldRequiredError('Name')
     }
-  
+
     const user = await this.usersRepository.findById(userId)
 
     if (!user) {
