@@ -5,6 +5,7 @@ const FakeCitiesRepository = require('../../src/infra/repositories/inMemory/Fake
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
 const UserFactory = require('../factories/domain/UserFactory')
 const CityFactory = require('../factories/domain/CityFactory')
+const ResourceNotFoundError = require('../../src/core/ResourceNotFoundError')
 
 let fakeCitiesRepository
 let fakeUsersRepository
@@ -30,7 +31,7 @@ describe('CreateUserUseCase', () => {
 
     await expect(
       createUserUseCase.execute(UserFactory.createUserDTO()),
-    ).rejects.toThrow(AppError)
+    ).rejects.toThrow(ResourceNotFoundError)
     expect(saveUserSpy).not.toHaveBeenCalled()
   })
 

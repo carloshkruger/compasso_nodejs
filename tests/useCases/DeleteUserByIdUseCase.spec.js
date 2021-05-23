@@ -4,6 +4,7 @@ const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeU
 const FieldRequiredError = require('../../src/core/FieldRequiredError')
 const AppError = require('../../src/core/AppError')
 const UserFactory = require('../factories/domain/UserFactory')
+const ResourceNotFoundError = require('../../src/core/ResourceNotFoundError')
 
 let fakeUsersRepository
 let deleteUserByIdUseCase
@@ -30,7 +31,7 @@ describe('DeleteUserByIdUseCase', () => {
     const userId = new UniqueId().value
 
     await expect(deleteUserByIdUseCase.execute({ userId })).rejects.toThrow(
-      AppError,
+      ResourceNotFoundError,
     )
   })
 

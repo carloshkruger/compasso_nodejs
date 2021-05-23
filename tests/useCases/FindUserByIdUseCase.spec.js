@@ -4,6 +4,7 @@ const AppError = require('../../src/core/AppError')
 const UniqueId = require('../../src/core/UniqueId')
 const User = require('../../src/domain/User')
 const UserFactory = require('../factories/domain/UserFactory')
+const ResourceNotFoundError = require('../../src/core/ResourceNotFoundError')
 
 let fakeUsersRepository
 let findUserByIdUseCase
@@ -30,7 +31,7 @@ describe('FindUserByIdUseCase', () => {
     const userId = new UniqueId().value
 
     await expect(findUserByIdUseCase.execute({ userId })).rejects.toThrow(
-      AppError,
+      ResourceNotFoundError,
     )
   })
 

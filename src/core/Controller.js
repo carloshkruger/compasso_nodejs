@@ -38,7 +38,7 @@ class Controller {
   handleExecutionError(error) {
     if (error instanceof AppError) {
       return {
-        statusCode: 400,
+        statusCode: error.statusCode,
         data: {
           error: error.message,
         },

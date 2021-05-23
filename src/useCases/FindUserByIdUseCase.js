@@ -1,5 +1,5 @@
-const AppError = require('../core/AppError')
 const FieldRequiredError = require('../core/FieldRequiredError')
+const ResourceNotFoundError = require('../core/ResourceNotFoundError')
 
 class FindUserByIdUseCase {
   constructor({ usersRepository }) {
@@ -14,7 +14,7 @@ class FindUserByIdUseCase {
     const user = await this.usersRepository.findById(userId)
 
     if (!user) {
-      throw new AppError('User not found.')
+      throw new ResourceNotFoundError('User')
     }
 
     return user

@@ -1,4 +1,4 @@
-const AppError = require('../core/AppError')
+const ResourceNotFoundError = require('../core/ResourceNotFoundError')
 const User = require('../domain/User')
 
 class CreateUserUseCase {
@@ -18,7 +18,7 @@ class CreateUserUseCase {
     const city = await this.citiesRepository.findById(cityId)
 
     if (!city) {
-      throw new AppError('City not found.')
+      throw new ResourceNotFoundError('City')
     }
 
     await this.usersRepository.save(user)

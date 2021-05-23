@@ -1,5 +1,5 @@
-const AppError = require('../../src/core/AppError')
 const FieldRequiredError = require('../../src/core/FieldRequiredError')
+const ResourceNotFoundError = require('../../src/core/ResourceNotFoundError')
 const UniqueId = require('../../src/core/UniqueId')
 const User = require('../../src/domain/User')
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
@@ -45,7 +45,7 @@ describe('UpdateUserNameUseCase', () => {
       .mockImplementationOnce(async () => undefined)
 
     await expect(updateUserNameUseCase.execute(useCaseDTO)).rejects.toThrow(
-      AppError,
+      ResourceNotFoundError,
     )
   })
 
