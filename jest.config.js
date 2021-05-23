@@ -7,6 +7,9 @@ module.exports = {
     '**/src/**/*.js',
     '!**/src/repositories/**',
     '!**/src/infra/repositories/inMemory/**',
+    '!**/src/infra/http/server.js',
+    '!**/src/infra/http/adapters/**',
+    '!**/src/infra/sequelize/utils/**',
   ],
   coverageThreshold: {
     global: {
