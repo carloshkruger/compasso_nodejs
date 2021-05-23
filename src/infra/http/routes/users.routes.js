@@ -1,49 +1,19 @@
 const { Router } = require('express')
-const CitiesRepository = require('../../repositories/SQLite/SQLiteCitiesRepository')
-const UsersRepository = require('../../repositories/SQLite/SQLiteUsersRepository')
-const CreateUserUseCase = require('../../../useCases/CreateUserUseCase')
-const UpdateUserNameUseCase = require('../../../useCases/UpdateUserNameUseCase')
-const DeleteUserByIdUseCase = require('../../../useCases/DeleteUserByIdUseCase')
-const CreateUserController = require('../../../controllers/CreateUserController')
-const UpdateUserNameController = require('../../../controllers/UpdateUserNameController')
-const DeleteUserByIdController = require('../../../controllers/DeleteUserByIdController')
 const expressRouterAdapter = require('../adapters/expressRouterAdapter')
+const createUserControllerFactory = require('../../../factories/controllers/createUserControllerFactory')
+const updateUserNameControllerFactory = require('../../../factories/controllers/updateUserNameControllerFactory')
+const deleteUserByIdControllerFactory = require('../../../factories/controllers/deleteUserByIdControllerFactory')
 
 const usersRouter = Router()
 
-const usersRepository = new UsersRepository()
-const citiesRepository = new CitiesRepository()
-
-const createUserUseCase = new CreateUserUseCase({
-  usersRepository,
-  citiesRepository,
-})
-const createUserController = new CreateUserController({
-  createUserUseCase,
-})
-
-const updateUserNameUseCase = new UpdateUserNameUseCase({
-  usersRepository,
-})
-const updateUserNameController = new UpdateUserNameController({
-  updateUserNameUseCase,
-})
-
-const deleteUserByIdUseCase = new DeleteUserByIdUseCase({
-  usersRepository,
-})
-const deleteUserByIdController = new DeleteUserByIdController({
-  deleteUserByIdUseCase,
-})
-
-usersRouter.post('/users/', expressRouterAdapter(createUserController))
+usersRouter.post('/users/', expressRouterAdapter(createUserControllerFactory()))
 usersRouter.delete(
   '/users/:userId',
-  expressRouterAdapter(deleteUserByIdController),
+  expressRouterAdapter(deleteUserByIdControllerFactory()),
 )
 usersRouter.patch(
   '/users/:userId/name',
-  expressRouterAdapter(updateUserNameController),
+  expressRouterAdapter(updateUserNameControllerFactory()),
 )
 
 module.exports = usersRouter
