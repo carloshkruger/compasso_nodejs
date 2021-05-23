@@ -39,7 +39,7 @@ describe('Controller', () => {
 
     const response = await testController.execute(params)
 
-    expect(response.message).toBe('Internal server error')
+    expect(response.data.error).toBe('Internal server error')
   })
 
   test('should return the error message if is an application error', async () => {
@@ -57,7 +57,7 @@ describe('Controller', () => {
 
     const response = await testController.execute(params)
 
-    expect(response.message).toBe(errorMessage)
+    expect(response.data.error).toBe(errorMessage)
   })
 
   test('should return statusCode 200 when "created" method is called', async () => {
