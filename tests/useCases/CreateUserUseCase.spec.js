@@ -1,21 +1,15 @@
 const AppError = require('../../src/core/AppError')
-const UniqueId = require('../../src/core/UniqueId')
 const User = require('../../src/domain/User')
 const CreateUserUseCase = require('../../src/useCases/CreateUserUseCase')
 const FakeCitiesRepository = require('../../src/infra/repositories/inMemory/FakeCitiesRepository')
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
+const UserFactory = require('../factories/domain/UserFactory')
+const CityFactory = require('../factories/domain/CityFactory')
 
 let fakeCitiesRepository
 let fakeUsersRepository
 let createUserUseCase
 let saveUserSpy
-
-const userDTO = {
-  name: 'Valid user name',
-  gender: 'valid gender',
-  birthdate: new Date(),
-  cityId: new UniqueId().value,
-}
 
 describe('CreateUserUseCase', () => {
   beforeEach(() => {
@@ -34,21 +28,20 @@ describe('CreateUserUseCase', () => {
       .spyOn(fakeCitiesRepository, 'findById')
       .mockImplementationOnce(async () => undefined)
 
-    await expect(createUserUseCase.execute(userDTO)).rejects.toThrow(AppError)
+    await expect(
+      createUserUseCase.execute(UserFactory.createUserDTO()),
+    ).rejects.toThrow(AppError)
     expect(saveUserSpy).not.toHaveBeenCalled()
   })
 
   test('should create an user if the values are correct', async () => {
-    const city = {
-      name: 'Aurora',
-      state: 'SC',
-    }
-
     jest
       .spyOn(fakeCitiesRepository, 'findById')
-      .mockImplementationOnce(async () => city)
+      .mockImplementationOnce(async () => CityFactory.create())
 
-    const useCaseResponse = await createUserUseCase.execute(userDTO)
+    const useCaseResponse = await createUserUseCase.execute(
+      UserFactory.createUserDTO(),
+    )
 
     expect(useCaseResponse).toBeInstanceOf(User)
     expect(saveUserSpy).toHaveBeenCalled()

@@ -2,7 +2,7 @@ const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeU
 const FindUserByIdUseCase = require('../../src/useCases/FindUserByIdUseCase')
 const FindUserByIdController = require('../../src/controllers/FindUserByIdController')
 const UniqueId = require('../../src/core/UniqueId')
-const User = require('../../src/domain/User')
+const UserFactory = require('../factories/domain/UserFactory')
 
 let fakeUsersRepository
 let findUserByIdUseCase
@@ -20,12 +20,7 @@ describe('CreateUserController', () => {
   })
 
   test('should return statusCode 200 on success with the user data', async () => {
-    const user = new User({
-      name: 'user name',
-      gender: 'gender',
-      birthdate: new Date(),
-      cityId: new UniqueId().value,
-    })
+    const user = UserFactory.create()
 
     jest
       .spyOn(findUserByIdUseCase, 'execute')

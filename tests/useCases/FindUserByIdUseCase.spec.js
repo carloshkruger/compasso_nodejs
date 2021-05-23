@@ -3,6 +3,7 @@ const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeU
 const AppError = require('../../src/core/AppError')
 const UniqueId = require('../../src/core/UniqueId')
 const User = require('../../src/domain/User')
+const UserFactory = require('../factories/domain/UserFactory')
 
 let fakeUsersRepository
 let findUserByIdUseCase
@@ -34,12 +35,7 @@ describe('FindUserByIdUseCase', () => {
   })
 
   test('should return an user if exists', async () => {
-    const user = new User({
-      name: 'Valid user name',
-      gender: 'valid gender',
-      birthdate: new Date(),
-      cityId: new UniqueId().value,
-    })
+    const user = UserFactory.create()
 
     jest
       .spyOn(fakeUsersRepository, 'findById')

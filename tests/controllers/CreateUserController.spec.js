@@ -2,20 +2,12 @@ const FakeCitiesRepository = require('../../src/infra/repositories/inMemory/Fake
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
 const CreateUserUseCase = require('../../src/useCases/CreateUserUseCase')
 const CreateUserController = require('../../src/controllers/CreateUserController')
-const UniqueId = require('../../src/core/UniqueId')
-const User = require('../../src/domain/User')
+const UserFactory = require('../factories/domain/UserFactory')
 
 let fakeCitiesRepository
 let fakeUsersRepository
 let createUserUseCase
 let createUserController
-
-const userDTO = {
-  name: 'user name',
-  gender: 'gender',
-  birthdate: new Date(),
-  cityId: new UniqueId().value,
-}
 
 describe('CreateUserController', () => {
   beforeEach(() => {
@@ -31,14 +23,14 @@ describe('CreateUserController', () => {
   })
 
   test('should return statusCode 201 and id on success', async () => {
-    const user = new User(userDTO)
+    const user = UserFactory.create()
 
     jest
       .spyOn(createUserUseCase, 'execute')
       .mockImplementation(async () => user)
 
     const controllerResponse = await createUserController.execute({
-      data: userDTO,
+      data: UserFactory.createUserDTO(),
     })
 
     expect(controllerResponse.statusCode).toBe(201)

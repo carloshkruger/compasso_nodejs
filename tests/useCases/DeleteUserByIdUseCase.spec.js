@@ -3,7 +3,7 @@ const DeleteUserByIdUseCase = require('../../src/useCases/DeleteUserByIdUseCase'
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
 const FieldRequiredError = require('../../src/core/FieldRequiredError')
 const AppError = require('../../src/core/AppError')
-const User = require('../../src/domain/User')
+const UserFactory = require('../factories/domain/UserFactory')
 
 let fakeUsersRepository
 let deleteUserByIdUseCase
@@ -35,12 +35,7 @@ describe('DeleteUserByIdUseCase', () => {
   })
 
   test('should delete an user', async () => {
-    const user = new User({
-      name: 'Valid user name',
-      gender: 'valid gender',
-      birthdate: new Date(),
-      cityId: new UniqueId().value,
-    })
+    const user = UserFactory.create()
 
     jest
       .spyOn(fakeUsersRepository, 'findById')

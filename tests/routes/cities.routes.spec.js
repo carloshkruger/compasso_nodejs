@@ -6,7 +6,7 @@ const {
   disconnect,
   clearDataBase,
 } = require('../../src/infra/sequelize/helper')
-const City = require('../../src/domain/City')
+const CityFactory = require('../factories/domain/CityFactory')
 
 describe('Cities routes', () => {
   beforeAll(async () => {
@@ -25,24 +25,17 @@ describe('Cities routes', () => {
   test('Create city', async () => {
     await request(app)
       .post('/cities')
-      .send({
-        name: 'new city name',
-        state: 'SC',
-      })
+      .send(CityFactory.createCityDTO())
       .expect(201)
   })
 
   test('Find cities by name', async () => {
     const sqliteCitiesRepository = new SQLiteCitiesRepository()
 
-    const cityName = 'Rio do Sul'
+    const city = CityFactory.create()
+    const cityName = city.name
 
-    await sqliteCitiesRepository.save(
-      new City({
-        name: cityName,
-        state: 'SC',
-      }),
-    )
+    await sqliteCitiesRepository.save(city)
 
     await request(app).get(`/cities?name=${cityName}`).expect(200)
   })
@@ -50,15 +43,10 @@ describe('Cities routes', () => {
   test('Find cities by uf', async () => {
     const sqliteCitiesRepository = new SQLiteCitiesRepository()
 
-    const cityName = 'Rio do Sul'
-    const cityUf = 'SC'
+    const city = CityFactory.create()
+    const cityUf = city.state
 
-    await sqliteCitiesRepository.save(
-      new City({
-        name: cityName,
-        state: cityUf,
-      }),
-    )
+    await sqliteCitiesRepository.save(city)
 
     await request(app).get(`/uf/${cityUf}/cities`).expect(200)
   })

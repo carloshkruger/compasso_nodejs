@@ -4,6 +4,7 @@ const UniqueId = require('../../src/core/UniqueId')
 const User = require('../../src/domain/User')
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
 const UpdateUserNameUseCase = require('../../src/useCases/UpdateUserNameUseCase')
+const UserFactory = require('../factories/domain/UserFactory')
 
 let fakeUsersRepository
 let updateUserNameUseCase
@@ -49,12 +50,7 @@ describe('UpdateUserNameUseCase', () => {
   })
 
   test('should update the user name', async () => {
-    const user = new User({
-      name: 'Valid user name',
-      gender: 'valid gender',
-      birthdate: new Date(),
-      cityId: new UniqueId().value,
-    })
+    const user = UserFactory.create()
 
     jest
       .spyOn(fakeUsersRepository, 'findById')

@@ -6,13 +6,11 @@ const {
   disconnect,
   clearDataBase,
 } = require('../../../../src/infra/sequelize/helper')
+const CityFactory = require('../../../factories/domain/CityFactory')
 
 const sqliteCitiesRepository = new SQLiteCitiesRepository()
 
-const cityDefault = new City({
-  name: 'Aurora',
-  state: 'SC',
-})
+const cityDefault = CityFactory.create()
 
 describe('SQLiteCitiesRepository', () => {
   beforeAll(async () => {

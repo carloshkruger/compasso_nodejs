@@ -7,21 +7,13 @@ const {
   disconnect,
   clearDataBase,
 } = require('../../src/infra/sequelize/helper')
-const City = require('../../src/domain/City')
-const User = require('../../src/domain/User')
+const CityFactory = require('../factories/domain/CityFactory')
+const UserFactory = require('../factories/domain/UserFactory')
 
 const sqliteCitiesRepository = new SQLiteCitiesRepository()
 const sqliteUsersRepository = new SQLiteUsersRepository()
-const city = new City({
-  name: 'Rio do Sul',
-  state: 'SC',
-})
-const user = new User({
-  name: 'user name',
-  gender: 'Masculino',
-  birthdate: '2000-01-01',
-  cityId: city.id,
-})
+const city = CityFactory.create()
+const user = UserFactory.createWithGivenCity(city)
 
 describe('Users routes', () => {
   beforeAll(async () => {

@@ -1,8 +1,7 @@
 const FakeUsersRepository = require('../../src/infra/repositories/inMemory/FakeUsersRepository')
 const UpdateUserNameUseCase = require('../../src/useCases/UpdateUserNameUseCase')
 const UpdateUserNameController = require('../../src/controllers/UpdateUserNameController')
-const UniqueId = require('../../src/core/UniqueId')
-const User = require('../../src/domain/User')
+const UserFactory = require('../factories/domain/UserFactory')
 
 let fakeUsersRepository
 let updateUserNameUseCase
@@ -20,12 +19,7 @@ describe('UpdateUserNameController', () => {
   })
 
   test('should return statusCode 204 on success with no data', async () => {
-    const user = new User({
-      name: 'user name',
-      gender: 'gender',
-      birthdate: new Date(),
-      cityId: new UniqueId().value,
-    })
+    const user = UserFactory.create()
 
     jest
       .spyOn(updateUserNameUseCase, 'execute')

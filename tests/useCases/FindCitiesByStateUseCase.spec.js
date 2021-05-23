@@ -1,4 +1,3 @@
-const AppError = require('../../src/core/AppError')
 const FieldRequiredError = require('../../src/core/FieldRequiredError')
 const City = require('../../src/domain/City')
 const FakeCitiesRepository = require('../../src/infra/repositories/inMemory/FakeCitiesRepository')

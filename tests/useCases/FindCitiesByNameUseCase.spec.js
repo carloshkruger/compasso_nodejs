@@ -1,4 +1,3 @@
-const AppError = require('../../src/core/AppError')
 const FindCitiesByNameUseCase = require('../../src/useCases/FindCitiesByNameUseCase')
 const FakeCitiesRepository = require('../../src/infra/repositories/inMemory/FakeCitiesRepository')
 const FieldRequiredError = require('../../src/core/FieldRequiredError')

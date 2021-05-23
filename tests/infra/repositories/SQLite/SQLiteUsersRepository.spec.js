@@ -1,5 +1,4 @@
 const UniqueId = require('../../../../src/core/UniqueId')
-const City = require('../../../../src/domain/City')
 const User = require('../../../../src/domain/User')
 const SQLiteUsersRepository = require('../../../../src/infra/repositories/SQLite/SQLiteUsersRepository')
 const SQLiteCitiesRepository = require('../../../../src/infra/repositories/SQLite/SQLiteCitiesRepository')
@@ -8,21 +7,14 @@ const {
   disconnect,
   clearDataBase,
 } = require('../../../../src/infra/sequelize/helper')
+const UserFactory = require('../../../factories/domain/UserFactory')
+const CityFactory = require('../../../factories/domain/CityFactory')
 
 const sqliteCitiesRepository = new SQLiteCitiesRepository()
 const sqliteUsersRepository = new SQLiteUsersRepository()
 
-const cityDefault = new City({
-  name: 'Aurora',
-  state: 'SC',
-})
-
-const userDefault = new User({
-  name: 'user name',
-  gender: 'gender',
-  birthdate: new Date(),
-  cityId: cityDefault.id,
-})
+const cityDefault = CityFactory.create()
+const userDefault = UserFactory.createWithGivenCity(cityDefault)
 
 describe('SQLiteUsersRepository', () => {
   beforeAll(async () => {
