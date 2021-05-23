@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "npx nodemon src/infra/http/server.js",
-    "test": "npx jest --runInBand",
-    "test:cov": "npx jest --clearCache && npm run test -- --coverage",
+    "test": "NODE_ENV=test npx jest --runInBand",
+    "test:cov": "NODE_ENV=test npx jest --clearCache && npm run test -- --coverage",
     "prepare": "husky install"
   },
   "keywords": [],
