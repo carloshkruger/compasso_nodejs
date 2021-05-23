@@ -5,6 +5,8 @@ class FakeCitiesRepository extends CitiesRepository {
 
   async findByName() {}
 
+  async findByState(state) {}
+
   async save(city) {}
 }
 
