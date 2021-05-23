@@ -25,10 +25,6 @@ const User = sequelize.define(
     cityId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: City,
-        key: 'id',
-      },
     },
   },
   {
@@ -36,5 +32,7 @@ const User = sequelize.define(
     timestamps: true,
   },
 )
+
+User.hasOne(City)
 
 module.exports = User
