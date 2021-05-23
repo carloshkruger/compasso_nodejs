@@ -59,4 +59,16 @@ describe('Users routes', () => {
 
     await request(app).delete(`/users/${user.id}`).send().expect(204)
   })
+
+  test('Find users by id', async () => {
+    await sqliteUsersRepository.save(user)
+
+    await request(app).get(`/users/${user.id}`).send().expect(200)
+  })
+
+  test('Find users by name', async () => {
+    await sqliteUsersRepository.save(user)
+
+    await request(app).get(`/users?name=${user.name}`).send().expect(200)
+  })
 })

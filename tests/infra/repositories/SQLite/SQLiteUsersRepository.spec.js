@@ -73,4 +73,18 @@ describe('SQLiteUsersRepository', () => {
 
     expect(user).toBeFalsy()
   })
+
+  test('should find users by name and return a list', async () => {
+    await sqliteUsersRepository.save(userDefault)
+
+    const users = await sqliteUsersRepository.findByName(userDefault.name)
+
+    expect(users.length).toBe(1)
+  })
+
+  test('should find users by name and return an empty list if none was found', async () => {
+    const users = await sqliteCitiesRepository.findByName('user name')
+
+    expect(users.length).toBe(0)
+  })
 })

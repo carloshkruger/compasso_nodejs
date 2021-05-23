@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const UsersRepository = require('../../../repositories/UsersRepository')
 const { UserSequelizeModel } = require('../../sequelize/models')
 const User = require('../../../domain/User')
@@ -24,6 +25,18 @@ class SQLiteUsersRepository extends UsersRepository {
     }
 
     return this.mapModel(userModel)
+  }
+
+  async findByName(name) {
+    const userModels = await UserSequelizeModel.findAll({
+      where: {
+        name: {
+          [Op.like]: `%${name}%`,
+        },
+      },
+    })
+
+    return userModels.map((userModel) => this.mapModel(userModel))
   }
 
   async deleteById(id) {
