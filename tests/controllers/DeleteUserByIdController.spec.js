@@ -7,7 +7,7 @@ let fakeUsersRepository
 let deleteUserByIdUseCase
 let deleteUserByIdController
 
-describe('CreateUserController', () => {
+describe('DeleteUserByIdController', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
     deleteUserByIdUseCase = new DeleteUserByIdUseCase({
