@@ -9,8 +9,11 @@ const {
 const City = require('../../src/domain/City')
 
 describe('Cities routes', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await connect()
+  })
+
+  beforeEach(async () => {
     await clearDataBase()
   })
 

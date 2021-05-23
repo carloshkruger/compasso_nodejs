@@ -15,8 +15,11 @@ const cityDefault = new City({
 })
 
 describe('SQLiteCitiesRepository', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await connect()
+  })
+
+  beforeEach(async () => {
     await clearDataBase()
   })
 
