@@ -1,13 +1,30 @@
 const CitiesRepository = require('../../../repositories/CitiesRepository')
 
 class FakeCitiesRepository extends CitiesRepository {
-  async findById(id) {}
+  constructor() {
+    super()
+    this.data = []
+  }
 
-  async findByName() {}
+  async findById(id) {
+    return this.data.find((city) => city.id === id)
+  }
 
-  async findByState(state) {}
+  async findByName(name) {
+    return this.data.filter(
+      (city) => city.name.toLowerCase().indexOf(name.toLowerCase()) > -1,
+    )
+  }
 
-  async save(city) {}
+  async findByState(state) {
+    return this.data.filter(
+      (city) => city.state.toLowerCase().indexOf(state.toLowerCase()) > -1,
+    )
+  }
+
+  async save(city) {
+    this.data.push(city)
+  }
 }
 
 module.exports = FakeCitiesRepository
