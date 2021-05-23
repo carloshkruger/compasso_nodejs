@@ -9,7 +9,7 @@ class DeleteUserByIdController extends Controller {
   async handle(request) {
     const { userId } = request.data
 
-    await this.deleteUserByIdUseCase.execute(userId)
+    await this.deleteUserByIdUseCase.execute({ userId })
 
     return this.noContent()
   }

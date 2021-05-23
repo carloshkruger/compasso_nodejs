@@ -35,6 +35,6 @@ describe('DeleteUserByIdController', () => {
 
     expect(controllerResponse.statusCode).toBe(204)
     expect(controllerResponse.data).toBeFalsy()
-    expect(useCaseExecuteSpy).toHaveBeenCalledWith(userId)
+    expect(useCaseExecuteSpy).toHaveBeenCalledWith({ userId })
   })
 })
