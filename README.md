@@ -2,7 +2,10 @@
     Compasso Node.js
 </h1>
 
-Para rodar a aplicação é necessário que você possua esses dois programas:
+Aplicação para cadastro e consulta de cidades e usuários.
+Desenvolvido utilizando Clean Architecture e TDD para uma melhor organização e manutenibilidade do código.
+
+Para rodar a aplicação é necessário que você tenha instalado:
 
 - [Git](https://git-scm.com)
 - [Node.js](https://nodejs.org/)
